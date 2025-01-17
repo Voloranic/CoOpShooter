@@ -1,8 +1,18 @@
 using System;
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
+    public static event EventHandler OnAnyPlayerSpawned;
+
+    public static void ResetStaticData()
+    {
+        OnAnyPlayerSpawned = null;
+    }
+
+    public static PlayerMovement LocalInstance;
+
     [Header("Components")]
     Rigidbody2D rb;
 
@@ -10,60 +20,68 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] Transform groundCheckTransform;
     [SerializeField] Vector2 groundCheckSize = new(0.8f, 0.1f);
-    bool isTouchingGround = false;
+    bool isGrounded = false;
 
+    /*
     [SerializeField] Transform leftWallCheckTransform;
     [SerializeField] Transform rightWallCheckTransform;
     [SerializeField] Vector2 wallCheckSize = new(0.1f, 0.7f);
     bool isTouchingLeftWall = false;
     bool isTouchingRightWall = false;
+    */
 
     [Header("Movement")]
-    float xMoveInput = 0f;
+    float xMoveInput;
     [SerializeField] float moveSpeed = 10f;
 
-    void Start()
+    //Start
+    public override void OnNetworkSpawn()
     {
-        rb = GetComponent<Rigidbody2D>();
+        if (!IsOwner) return;
 
+        LocalInstance = this;
+
+        OnAnyPlayerSpawned.Invoke(this, EventArgs.Empty);
+
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
+        if (!IsOwner) return;
 
+        GetPlayerInput();
+        GroundCheck();
     }
 
-    private void FixedUpdate()
-    {
-        Movement();
-    }
-
-
-    void Movement()
+    void GetPlayerInput()
     {
         xMoveInput = Input.GetAxis("Horizontal");
-        Vector2 deltaPosition = new(xMoveInput * moveSpeed * Time.deltaTime, 0f);
-        deltaPosition += new Vector2(0f, -rb.gravityScale * Time.deltaTime);
-
-        isTouchingGround = Physics2D.BoxCast(groundCheckTransform.position, groundCheckSize, 0f, Vector2.down, 0f, groundLayer);
-
-        isTouchingLeftWall = Physics2D.BoxCast(leftWallCheckTransform.position, wallCheckSize, 0f, Vector2.down, 0f, groundLayer);
-        isTouchingRightWall = Physics2D.BoxCast(rightWallCheckTransform.position, wallCheckSize, 0f, Vector2.down, 0f, groundLayer);
-
-        if (isTouchingGround)
-        {
-            deltaPosition.y = 0f;
-        }
-        if (isTouchingLeftWall)
-        {
-            deltaPosition.x = Mathf.Clamp(deltaPosition.x, 0f, float.MaxValue);
-        }
-        if (isTouchingRightWall)
-        {
-            deltaPosition.x = Mathf.Clamp(deltaPosition.x, float.MinValue, 0f);
-        }
-
-        rb.MovePosition(rb.position + deltaPosition);
     }
 
+    void FixedUpdate()
+    {
+        if (!IsOwner) return;
+
+        Move();
+    }
+
+    void Move()
+    {
+        rb.linearVelocity = new Vector2(xMoveInput * moveSpeed * Time.deltaTime, Mathf.Clamp(rb.linearVelocity.y, -rb.gravityScale, float.MaxValue));
+        transform.Translate(new Vector2(xMoveInput * moveSpeed * Time.deltaTime, 0));
+    }
+
+    void GroundCheck()
+    {
+
+        isGrounded = Physics2D.BoxCast(groundCheckTransform.position, groundCheckSize, 0f, Vector2.down, 0f, groundLayer);
+
+        /*
+        isTouchingLeftWall = Physics2D.BoxCast(leftWallCheckTransform.position, wallCheckSize, 0f, Vector2.down, 0f, groundLayer);
+        isTouchingRightWall = Physics2D.BoxCast(rightWallCheckTransform.position, wallCheckSize, 0f, Vector2.down, 0f, groundLayer);
+        */
+    }
+
+    
 }

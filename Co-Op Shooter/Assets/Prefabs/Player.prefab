@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 403711314998555952}
   - component: {fileID: 1431658200711166982}
   - component: {fileID: 6439688137907065602}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,9 +147,6 @@ MonoBehaviour:
     m_Bits: 64
   groundCheckTransform: {fileID: 4304665898149897954}
   groundCheckSize: {x: 0.8, y: 0.1}
-  leftWallCheckTransform: {fileID: 1890627223821053858}
-  rightWallCheckTransform: {fileID: 599009979910952624}
-  wallCheckSize: {x: 0.4, y: 0.7}
   moveSpeed: 10
 --- !u!114 &6439688137907065602
 MonoBehaviour:
@@ -197,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3921388069092102827}
   - component: {fileID: 6736400944347908158}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +280,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 599009979910952624}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Right Wall Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -314,7 +311,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4304665898149897954}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ground Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +342,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1890627223821053858}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Left Wall Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}

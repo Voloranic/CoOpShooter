@@ -29,4 +29,5 @@ public class GameManager : MonoBehaviour
     {
         PlayerMovement.ResetStaticData();
     }
+
 }

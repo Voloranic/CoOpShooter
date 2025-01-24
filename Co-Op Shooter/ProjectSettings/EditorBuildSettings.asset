@@ -6,14 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Redler_Lobby_Scene.unity
-    guid: 7666a485fb6571940ac03624243d85c3
+    path: Assets/Scenes/Ran_Lobby.unity
+    guid: adba7b5706bb07b4889977d8448424c3
   - enabled: 1
-    path: Assets/Scenes/Redler_Game_Scene.unity
+    path: Assets/Scenes/Ran_Game_Scene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 0
-    path: Assets/NGO_Minimal_Setup/NGO_Setup.unity
-    guid: d60e483a485bc3a448593fb3b5df6d52
+  - enabled: 1
+    path: Assets/Scenes/Amir_Scene.unity
+    guid: 104a3a756a0ea654ca98e47255b24f71
+  - enabled: 1
+    path: Assets/Scenes/Ran_CharacterSelect.unity
+    guid: 274a30e657492e449979a065bef86209
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

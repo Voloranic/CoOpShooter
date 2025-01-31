@@ -5,7 +5,6 @@ public static class Loader
 {
     public enum Scene
     {
-        Amir_Scene,
         Ran_CharacterSelect,
         Ran_Game_Scene,
         Ran_Lobby

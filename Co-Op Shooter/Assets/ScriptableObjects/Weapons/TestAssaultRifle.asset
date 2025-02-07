@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Test AR
   weaponType: 0
-  weaponSpritePrefab: {fileID: 3512077102137089790, guid: 09323badb7536f8459809335f806263d, type: 3}
+  weaponSpritePrefab: {fileID: 7651696554032184490, guid: 428e501567519b846839a2ea6815aacc, type: 3}
   weaponItemPrefab: {fileID: 0}
   magazineSize: 25
   magazineClipSize: 30
